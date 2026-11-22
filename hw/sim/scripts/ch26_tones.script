@@ -1,0 +1,15 @@
+# ch26_tones.script - one tone and the noise voice, recorded for analysis
+expect MEMORY SIZE
+send \r
+expect WIDTH
+send \r
+expect OK\r\n
+send SOUND 0,440,15\r
+expect OK\r\n
+wav out/ch26_a440.wav 200
+send SOUND 0,440,0:SOUND 3,150,8\r
+expect OK\r\n
+wav out/ch26_noise.wav 200
+send SOUND 3,0,0\r
+expect OK\r\n
+quit

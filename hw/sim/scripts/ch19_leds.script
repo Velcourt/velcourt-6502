@@ -1,0 +1,10 @@
+# ch19_leds.script - the first-power-up LED test from Chapter 19
+expect MEMORY SIZE
+send \r
+expect WIDTH
+send \r
+expect OK\r\n
+send POKE 48928,21:PRINT PEEK(48928),PEEK(48930),PEEK(48929) AND 1\r
+expect OK\r\n
+frame out/ch19_leds.ppm
+quit

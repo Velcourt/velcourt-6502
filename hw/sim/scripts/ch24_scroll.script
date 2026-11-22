@@ -1,0 +1,14 @@
+# ch24_scroll.script - machine-speed typing while the screen scrolls
+expect MEMORY SIZE
+ps2 \r
+expect WIDTH
+ps2 \r
+expect OK\r\n
+# fill the screen so that every new line scrolls it
+ps2 for i=1 to 30:print i:next\r
+expect OK\r\n
+ps2 print 111\r
+ps2 print 222\r
+ps2 print 333\r
+wait 300
+quit

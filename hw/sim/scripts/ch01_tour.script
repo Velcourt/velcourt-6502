@@ -1,0 +1,39 @@
+# ch01_tour.script - the tour of Chapter 1: BASIC, graphics and files
+expect MEMORY SIZE
+send \r
+expect WIDTH
+send \r
+expect BYTES FREE
+expect OK\r\n
+# type the program of sw/examples/ch01_fan.bas
+send 10 COLOR 1,0:CLS\r
+send 20 FOR I=0 TO 319 STEP 8\r
+send 30 LINE 160,100,I,0,(I/8) AND 15\r
+send 40 LINE 160,100,319-I,199,(I/8+5) AND 15\r
+send 50 NEXT\r
+send 60 FOR A=0 TO 6.28 STEP .02\r
+send 70 PLOT 160+60*COS(A),100+60*SIN(A),7\r
+send 80 NEXT\r
+send 90 PRINT "VELCOURT 6502"\r
+send RUN\r
+expect VELCOURT 6502\r\n
+expect OK\r\n
+frame out/ch01_fan.ppm
+send SAVE "FAN"\r
+expect SAVED
+expect OK\r\n
+send COLOR 1,6:CLS\r
+expect OK\r\n
+send NEW\r
+expect OK\r\n
+send LIST\r
+expect OK\r\n
+send LOAD "$"\r
+expect OK\r\n
+send LOAD "FAN"\r
+expect LOADED
+expect OK\r\n
+send LIST 60-90\r
+expect OK\r\n
+frame out/ch01_files.ppm
+quit

@@ -1,0 +1,10 @@
+# ch06_border.script - change the border colour through $BF50 (48976)
+expect MEMORY SIZE
+send \r
+expect WIDTH
+send \r
+expect OK\r\n
+send POKE 48976,7:PRINT PEEK(48976)\r
+expect OK\r\n
+frame out/ch06_border.ppm
+quit

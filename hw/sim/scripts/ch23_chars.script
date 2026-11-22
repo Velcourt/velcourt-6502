@@ -1,0 +1,21 @@
+# ch23_chars.script - the whole route: monitor, L, Intel HEX records, G
+reset S2
+expect *
+send L\r
+expect SEND THE HEX FILE NOW
+send :10060000A2202026068A203006A93A2000FFA92031\r
+send :100610002000FF8A2000FFE8E07FF0078A290FD042\r
+send :10062000EDF0DF4C2606A90D2000FFA90A4C00FFC3\r
+send :10063000484A4A4A4A203B0668290FC90A9002697B\r
+send :060640000669304C00FFCA\r
+send :00000001FF\r
+expect \r\n*
+expect \r\n*
+send G 0600\r
+expect 70: p q
+expect \r\n*
+frame out/ch23_chars.ppm
+send D 0600 0645\r
+expect 0640:
+expect \r\n*
+quit

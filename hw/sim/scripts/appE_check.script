@@ -1,0 +1,44 @@
+# appE_check.script - Appendix E: facts about BASIC checked in the simulator
+expect MEMORY SIZE
+send \r
+expect WIDTH
+send \r
+expect OK\r\n
+send ? 1=1, 1=2, NOT 0\r
+expect OK\r\n
+send ABC=5:PRINT ABD\r
+expect OK\r\n
+send PRINT FRE(0)\r
+expect OK\r\n
+send PRINT 2+3*2^2, -2^2\r
+expect OK\r\n
+send INPUT A\r
+expect OK\r\n
+send PRINT 1/0\r
+expect OK\r\n
+send GOTO 100\r
+expect OK\r\n
+send X=USR(0)\r
+expect OK\r\n
+send PRINT LEN("HELLO"), MID$("HELLO",2,3), ASC("A"), CHR$(66)\r
+expect OK\r\n
+send PRINT PEEK(49152), INT(-2.5), SGN(-3), ABS(-4)\r
+expect OK\r\n
+send PRINT 7 AND 12, 7 OR 8, 5>3\r
+expect OK\r\n
+send 10 PRINT "A";:GO TO 30\r
+send 20 PRINT "B"\r
+send 30 PRINT "C":STOP\r
+send RUN\r
+expect OK\r\n
+send CONT\r
+expect OK\r\n
+send PRINT 64000\r
+expect OK\r\n
+send 64000 PRINT\r
+expect OK\r\n
+send DIM A(5):DIM A(5)\r
+expect OK\r\n
+send PRINT TAB(5);"X";SPC(3);"Y"\r
+expect OK\r\n
+quit

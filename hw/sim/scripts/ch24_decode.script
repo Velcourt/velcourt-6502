@@ -1,0 +1,14 @@
+# ch24_decode.script - load sw/examples/ch24_decode.s through the monitor and run it
+reset S2
+expect *
+send L\r
+send :10060000A2008610BD1A06F010208EE420B6EEA9D6\r
+send :10061000202000FFA610E8D0E9601421F021F0149A\r
+send :10062000121CF01CF012E071E0F071E074E0F07464\r
+send :0D063000E01421E0F014F0211C7683AA00F4\r
+send :00000001FF\r
+expect *
+send G 0600\r
+expect *
+wait 100
+quit

@@ -1,0 +1,27 @@
+# ch26_tune.script - type in sw/examples/ch26_tune.bas, run it, record it
+expect MEMORY SIZE
+send \r
+expect WIDTH
+send \r
+expect OK\r\n
+send 10 REM TWO-VOICE TUNE: MELODY ON VOICE 0, BASS ON VOICE 1\r
+send 20 READ F,B,D\r
+send 30 IF D=0 THEN 100\r
+send 40 SOUND 0,F,12:SOUND 1,B,6\r
+send 50 PAUSE D-3\r
+send 60 SOUND 0,F,0\r
+send 70 PAUSE 3\r
+send 80 GOTO 20\r
+send 100 SOUND 0,0,0:SOUND 1,0,0\r
+send 110 FOR V=9 TO 0 STEP -1:SOUND 3,150,V:PAUSE 3:NEXT\r
+send 120 PRINT \qTHE END\q\r
+send 200 DATA 262,131,20,262,131,20,392,131,20,392,131,20\r
+send 210 DATA 440,175,20,440,175,20,392,131,40\r
+send 220 DATA 349,175,20,349,175,20,330,131,20,330,131,20\r
+send 230 DATA 294,196,20,294,196,20,262,131,40\r
+send 240 DATA 0,0,0\r
+send RUN\r
+wav out/ch26_tune.wav 6200
+expect THE END
+expect OK\r\n
+quit

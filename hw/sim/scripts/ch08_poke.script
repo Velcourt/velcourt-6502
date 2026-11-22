@@ -1,0 +1,21 @@
+# ch08_poke.script - pixels by POKE and by PLOT (sw/examples/ch08_poke.bas)
+expect MEMORY SIZE
+send \r
+expect WIDTH
+send \r
+expect OK\r\n
+send 10 COLOR 1,0:CLS\r
+send 20 FOR C=0 TO 15:FOR Y=150 TO 169:A=16384+Y*160+C*10\r
+send 30 FOR I=0 TO 9:POKE A+I,C*17:NEXT:NEXT:NEXT\r
+send 40 FOR X=0 TO 319:Y=100+INT(40*SIN(X/25)):C=7:GOSUB 100\r
+send 50 PLOT X,100+INT(40*COS(X/25)),3:NEXT\r
+send 60 END\r
+send 100 A=16384+Y*160+INT(X/2):B=PEEK(A)\r
+send 110 IF X AND 1 THEN POKE A,(B AND 240)+C:RETURN\r
+send 120 POKE A,(B AND 15)+C*16:RETURN\r
+send RUN\r
+expect OK\r\n
+send PRINT PEEK(16384+100*160),PEEK(16384+150*160+30)\r
+expect OK\r\n
+frame out/ch08_poke.ppm
+quit

@@ -1,0 +1,24 @@
+# ch23_paste.script - "paste" a BASIC program: ten lines sent back to back
+# with no pause, then LIST it. Run with DBG_UART=1 to trace the UART.
+expect MEMORY SIZE
+send \r
+expect WIDTH
+send \r
+expect OK\r\n
+send 10 REM PASTED WITHOUT PAUSES, 115200 BAUD, 8N1\r
+send 20 FOR I=1 TO 10:PRINT I;I*I;I*I*I:NEXT I\r
+send 30 A$="THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG"\r
+send 40 PRINT A$:PRINT LEN(A$)\r
+send 50 FOR J=1 TO LEN(A$):B$=MID$(A$,J,1)+B$:NEXT J\r
+send 60 PRINT B$\r
+send 70 C=0:FOR K=0 TO 15:C=C+K*K:NEXT K:PRINT "SUM";C\r
+send 80 REM ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOP\r
+send 90 PRINT "END OF PASTE"\r
+send 100 END\r
+send LIST\r
+expect 100 END\r\n
+expect OK\r\n
+send RUN\r
+expect END OF PASTE
+expect OK\r\n
+quit

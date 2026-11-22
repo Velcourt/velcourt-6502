@@ -1,0 +1,18 @@
+# ch21_text.script - colours, the deferred wrap and the blinking cursor
+expect MEMORY SIZE
+send \r
+expect WIDTH
+send \r
+expect OK\r\n
+send COLOR 7,2:PRINT "LEMON INK ON BRICK RED PAPER":COLOR 1,6\r
+expect OK\r\n
+send PRINT "THIS LINE HAS EXACTLY FORTY CHARACTERS.."\r
+expect OK\r\n
+send PRINT "AND THIS ONE IS LONGER THAN FORTY CHARACTERS, SO IT WRAPS"\r
+expect OK\r\n
+frame out/ch21_text_a.ppm
+wait 150
+frame out/ch21_text_b.ppm
+wait 150
+frame out/ch21_text_c.ppm
+quit

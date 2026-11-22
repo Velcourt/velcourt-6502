@@ -1,0 +1,16 @@
+# ch22_basic.script - the LEDs and the S2 button from BASIC
+expect MEMORY SIZE
+send \r
+expect WIDTH
+send \r
+expect OK\r\n
+send POKE 48928,21:PRINT PEEK(48928)\r
+expect OK\r\n
+send POKE 48928,255:PRINT PEEK(48928)\r
+expect OK\r\n
+send PRINT PEEK(48929)\r
+expect OK\r\n
+send B=0:FOR I=1 TO 2000:B=B OR PEEK(48929):NEXT:PRINT "S2:";B\r
+button 300
+expect OK\r\n
+quit

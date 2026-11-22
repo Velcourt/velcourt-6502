@@ -1,0 +1,10 @@
+# ch01_lab.script - light LEDs 0, 2 and 4 from BASIC and read the port back
+expect MEMORY SIZE
+send \r
+expect WIDTH
+send \r
+expect BYTES FREE
+expect OK\r\n
+send POKE 48928,21:PRINT PEEK(48928)\r
+expect OK\r\n
+quit

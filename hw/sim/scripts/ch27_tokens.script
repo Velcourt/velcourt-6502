@@ -1,0 +1,17 @@
+# ch27_tokens.script - how BASIC stores a line: the bytes from $0601 up
+expect MEMORY SIZE
+send \r
+expect WIDTH
+send \r
+expect OK\r\n
+send 10 SCORE=10:?SCORE\r
+expect SCORE\r\n
+send 20 GOTO 10\r
+expect GOTO 10\r\n
+send LIST\r
+expect OK\r\n
+send FOR A=1537 TO 1567:PRINT PEEK(A);:NEXT\r
+expect OK\r\n
+send PRINT PEEK(122)+256*PEEK(123),PEEK(124)+256*PEEK(125)\r
+expect OK\r\n
+quit

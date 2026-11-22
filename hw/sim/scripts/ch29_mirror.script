@@ -1,0 +1,15 @@
+# ch29_mirror.script - the I/O page decodes only address bits 6-4, so
+# $BFD0 is the same register as $BF50 (the border colour).
+expect MEMORY SIZE
+send \r
+expect WIDTH
+send \r
+expect OK\r\n
+send PRINT PEEK(48976), PEEK(49104)\r
+expect OK\r\n
+send POKE 49104,2\r
+expect OK\r\n
+send PRINT PEEK(48976), PEEK(49104)\r
+expect OK\r\n
+frame out/ch29_mirror.ppm
+quit

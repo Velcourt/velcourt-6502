@@ -1,0 +1,22 @@
+# ch20_decode.script - poke at the address decoder from the monitor
+reset S2
+expect *
+send D BD00 BD07\r
+expect BD00:
+expect *
+send D BF50 BF57\r
+expect BF50:
+expect *
+send D BFD0 BFD7\r
+expect BFD0:
+expect *
+send E BFD0 02\r
+expect *
+send D BF50 BF57\r
+expect BF50:
+expect *
+send D BF60 BF67\r
+expect BF60:
+expect *
+frame out/ch20_border.ppm
+quit

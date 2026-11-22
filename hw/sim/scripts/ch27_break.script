@@ -1,0 +1,22 @@
+# ch27_break.script - Control-C stops a running program; CONT resumes
+expect MEMORY SIZE
+send \r
+expect WIDTH
+send \r
+expect OK\r\n
+send 10 N=N+1:GOTO 10\r
+expect GOTO 10\r\n
+send RUN\r
+wait 500
+# a Control-C character (code 3) follows "send "
+send 
+expect OK\r\n
+send PRINT N\r
+expect OK\r\n
+send CONT\r
+wait 200
+send 
+expect OK\r\n
+send PRINT N\r
+expect OK\r\n
+quit

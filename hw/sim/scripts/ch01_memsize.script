@@ -1,0 +1,10 @@
+# ch01_memsize.script - what happens if MEMORY SIZE is answered too high
+expect MEMORY SIZE
+send 30000\r
+expect WIDTH
+send \r
+expect OK
+send DIM A(4000)\r
+expect OK\r\n
+frame out/ch01_memsize.ppm
+quit

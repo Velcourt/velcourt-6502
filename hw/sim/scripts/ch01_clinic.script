@@ -1,0 +1,17 @@
+# ch01_clinic.script - three ways a first BASIC session goes wrong
+expect MEMORY SIZE
+send \r
+expect WIDTH
+send \r
+expect BYTES FREE
+expect OK\r\n
+send SCORE=5\r
+expect OK\r\n
+send PRINT 1/0\r
+expect OK\r\n
+send 10 GOTO 10\r
+send RUN\r
+wait 200
+send 
+expect OK\r\n
+quit

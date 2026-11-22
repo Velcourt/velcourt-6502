@@ -1,0 +1,25 @@
+# ch22_ledcount.script - load the LED counter, let it run one second,
+# stop it with a key and read the count back
+reset S2
+expect *
+send L\r
+expect SEND THE HEX FILE NOW
+send :10060000A93F8D22BFA9008D00078D01078D20BF56\r
+send :10061000A9408D2BBFA9178D24BFA9F68D25BF201A\r
+send :1006200006FFD025AD2DBF2940F0F4AD24BFEE006C\r
+send :1006300007AD0007C914D0E7A9008D0007EE010738\r
+send :0A064000AD01078D20BF4C1F0660BE\r
+send :00000001FF\r
+expect \r\n*
+expect \r\n*
+send G 0600\r
+wait 1000
+send Q
+expect \r\n*
+send D 0700 0701\r
+expect 0700:
+expect \r\n*
+send D BF20 BF27\r
+expect BF20:
+expect \r\n*
+quit

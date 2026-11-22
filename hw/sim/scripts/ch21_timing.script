@@ -1,0 +1,20 @@
+# ch21_timing.script - measure draw_char and CHROUT with VIA timer 2
+reset S2
+expect *
+send L\r
+expect SEND THE HEX FILE NOW
+send :10060000A90A8D0002A90C8D0102203006203806AF\r
+send :10061000A200203906203006A9412042E2A2022091\r
+send :100620003906203006A9422000FFA20420390660C6\r
+send :10063000A9FF8D28BF8D29BF60AD28BF9D0007ADE4\r
+send :0606400029BF9D010760C7\r
+send :00000001FF\r
+expect \r\n*
+expect \r\n*
+send G 0600\r
+expect \r\n*
+send D 0700 0707\r
+expect 0700:
+expect \r\n*
+frame out/ch21_timing.ppm
+quit

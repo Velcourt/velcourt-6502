@@ -1,0 +1,53 @@
+# ch28_paced.script - the same paste as ch28_paste.script, but with a
+# pause of 100 ms after each line, as a terminal's line delay gives.
+expect MEMORY SIZE
+send \r
+expect WIDTH
+send \r
+expect OK\r\n
+# fill the screen so that every new line scrolls
+send FOR I=1 TO 25:PRINT I:NEXT\r
+expect  25 \r\n
+expect OK\r\n
+# two programs, one line every 100 ms
+send 10 REM TIMES TABLE, NINE BY NINE\r
+wait 100
+send 20 FOR J=1 TO 9:PRINT TAB(J*4-1);J;:NEXT:PRINT\r
+wait 100
+send 30 FOR I=1 TO 9\r
+wait 100
+send 40 PRINT I;\r
+wait 100
+send 50 FOR J=1 TO 9\r
+wait 100
+send 60 P=I*J:PRINT TAB(J*4+1-LEN(STR$(P)));P;\r
+wait 100
+send 70 NEXT J\r
+wait 100
+send 80 PRINT\r
+wait 100
+send 90 NEXT I\r
+wait 100
+send 110 REM STRINGS: SLICING, JOINING, CONVERTING\r
+wait 100
+send 120 A$="VELCOURT"\r
+wait 100
+send 130 FOR I=1 TO LEN(A$):PRINT LEFT$(A$,I):NEXT\r
+wait 100
+send 140 B$=A$+" 6502":PRINT B$;LEN(B$)\r
+wait 100
+send 150 PRINT MID$(B$,10,4);ASC("A");CHR$(66);STR$(3.5);VAL("12")+1\r
+wait 100
+send 160 INPUT "YOUR NAME";N$\r
+wait 100
+send 170 R$="":FOR I=LEN(N$) TO 1 STEP -1:R$=R$+MID$(N$,I,1):NEXT\r
+wait 100
+send 180 PRINT "BACKWARDS: ";R$\r
+wait 100
+wait 1500
+# end any half-received line, then look at what BASIC stored
+send \r
+wait 200
+send LIST\r
+expect OK\r\n
+quit

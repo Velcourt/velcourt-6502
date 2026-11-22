@@ -1,0 +1,16 @@
+# ch05_smoke.script - a whole-system check: boot, type on both keyboards,
+# then save a picture of the screen
+expect MEMORY SIZE
+send \r
+expect WIDTH
+send \r
+expect BYTES FREE
+expect OK\r\n
+send PRINT 6502*2\r
+expect 13004
+expect OK\r\n
+ps2 PRINT "PS/2 OK"\r
+expect PS/2 OK\r\n
+expect OK\r\n
+frame out/ch05_smoke.ppm
+quit

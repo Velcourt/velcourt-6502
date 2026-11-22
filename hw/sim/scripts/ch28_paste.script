@@ -1,0 +1,21 @@
+# ch28_paste.script - pasting a program in one burst while the screen
+# is full: every new line scrolls the screen (about 40 ms), and the
+# characters that keep arriving overflow the 256-byte receive FIFO.
+expect MEMORY SIZE
+send \r
+expect WIDTH
+send \r
+expect OK\r\n
+# fill the screen so that every new line scrolls
+send FOR I=1 TO 25:PRINT I:NEXT\r
+expect  25 \r\n
+expect OK\r\n
+# two programs in one burst, as a terminal's paste would send it
+send 10 REM TIMES TABLE, NINE BY NINE\r20 FOR J=1 TO 9:PRINT TAB(J*4-1);J;:NEXT:PRINT\r30 FOR I=1 TO 9\r40 PRINT I;\r50 FOR J=1 TO 9\r60 P=I*J:PRINT TAB(J*4+1-LEN(STR$(P)));P;\r70 NEXT J\r80 PRINT\r90 NEXT I\r110 REM STRINGS: SLICING, JOINING, CONVERTING\r120 A$="VELCOURT"\r130 FOR I=1 TO LEN(A$):PRINT LEFT$(A$,I):NEXT\r140 B$=A$+" 6502":PRINT B$;LEN(B$)\r150 PRINT MID$(B$,10,4);ASC("A");CHR$(66);STR$(3.5);VAL("12")+1\r160 INPUT "YOUR NAME";N$\r170 R$="":FOR I=LEN(N$) TO 1 STEP -1:R$=R$+MID$(N$,I,1):NEXT\r180 PRINT "BACKWARDS: ";R$\r
+wait 1500
+# end any half-received line, then look at what BASIC stored
+send \r
+wait 200
+send LIST\r
+expect OK\r\n
+quit

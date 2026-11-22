@@ -1,0 +1,130 @@
+# ch27_programs.script - the example programs of Chapter 27, typed in,
+# run, saved to and loaded from the SD card image.
+# Run: ./obj_soc/sim_soc scripts/ch27_programs.script out/ch27_sd.img
+expect MEMORY SIZE
+send \r
+expect WIDTH
+send \r
+expect OK\r\n
+# 1. the times table (sw/examples/ch27_table.bas)
+send COLOR 1,0:CLS\r
+expect OK\r\n
+send 10 REM TIMES TABLE, NINE BY NINE\r
+expect 10 REM TIMES TABLE, NINE BY NINE\r\n
+send 20 FOR J=1 TO 9:PRINT TAB(J*4-1);J;:NEXT:PRINT\r
+expect 20 FOR J=1 TO 9:PRINT TAB(J*4-1);J;:NEXT:PRINT\r\n
+send 30 FOR I=1 TO 9\r
+expect 30 FOR I=1 TO 9\r\n
+send 40 PRINT I;\r
+expect 40 PRINT I;\r\n
+send 50 FOR J=1 TO 9\r
+expect 50 FOR J=1 TO 9\r\n
+send 60 P=I*J:PRINT TAB(J*4+1-LEN(STR$(P)));P;\r
+expect 60 P=I*J:PRINT TAB(J*4+1-LEN(STR$(P)));P;\r\n
+send 70 NEXT J\r
+expect 70 NEXT J\r\n
+send 80 PRINT\r
+expect 80 PRINT\r\n
+send 90 NEXT I\r
+expect 90 NEXT I\r\n
+send RUN\r
+expect 81 \r\n
+expect OK\r\n
+frame out/ch27_table.ppm
+send SAVE "TABLE"\r
+expect SAVED
+expect OK\r\n
+send NEW\r
+expect OK\r\n
+# 2. strings (sw/examples/ch27_strings.bas)
+send 10 REM STRINGS: SLICING, JOINING, CONVERTING\r
+expect 10 REM STRINGS: SLICING, JOINING, CONVERTING\r\n
+send 20 A$="VELCOURT"\r
+expect 20 A$="VELCOURT"\r\n
+send 30 FOR I=1 TO LEN(A$):PRINT LEFT$(A$,I):NEXT\r
+expect 30 FOR I=1 TO LEN(A$):PRINT LEFT$(A$,I):NEXT\r\n
+send 40 B$=A$+" 6502":PRINT B$;LEN(B$)\r
+expect 40 B$=A$+" 6502":PRINT B$;LEN(B$)\r\n
+send 50 PRINT MID$(B$,10,4);ASC("A");CHR$(66);STR$(3.5);VAL("12")+1\r
+expect 50 PRINT MID$(B$,10,4);ASC("A");CHR$(66);STR$(3.5);VAL("12")+1\r\n
+send 60 INPUT "YOUR NAME";N$\r
+expect 60 INPUT "YOUR NAME";N$\r\n
+send 70 R$="":FOR I=LEN(N$) TO 1 STEP -1:R$=R$+MID$(N$,I,1):NEXT\r
+expect 70 R$="":FOR I=LEN(N$) TO 1 STEP -1:R$=R$+MID$(N$,I,1):NEXT\r\n
+send 80 PRINT "BACKWARDS: ";R$\r
+expect 80 PRINT "BACKWARDS: ";R$\r\n
+send RUN\r
+expect NAME?
+send ADA LOVELACE\r
+expect OK\r\n
+send SAVE "STRINGS"\r
+expect OK\r\n
+send NEW\r
+expect OK\r\n
+# 3. graphics (sw/examples/ch27_graph.bas)
+send 10 REM SINE AND COSINE, PLOTTED POINT BY POINT\r
+expect 10 REM SINE AND COSINE, PLOTTED POINT BY POINT\r\n
+send 20 COLOR 1,0:CLS\r
+expect 20 COLOR 1,0:CLS\r\n
+send 30 LINE 0,100,319,100,12:LINE 160,16,160,199,12\r
+expect 30 LINE 0,100,319,100,12:LINE 160,16,160,199,12\r\n
+send 40 FOR X=0 TO 319 STEP 32:LINE X,97,X,103,12:NEXT\r
+expect 40 FOR X=0 TO 319 STEP 32:LINE X,97,X,103,12:NEXT\r\n
+send 50 FOR X=0 TO 319\r
+expect 50 FOR X=0 TO 319\r\n
+send 60 A=(X-160)/32\r
+expect 60 A=(X-160)/32\r\n
+send 70 PLOT X,100-70*SIN(A),7\r
+expect 70 PLOT X,100-70*SIN(A),7\r\n
+send 80 PLOT X,100-70*COS(A),3\r
+expect 80 PLOT X,100-70*COS(A),3\r\n
+send 90 NEXT\r
+expect 90 NEXT\r\n
+send 100 PRINT "YELLOW: SIN(X)  TEAL: COS(X)"\r
+expect 100 PRINT "YELLOW: SIN(X)  TEAL: COS(X)"\r\n
+send RUN\r
+expect TEAL: COS(X)\r\n
+expect OK\r\n
+frame out/ch27_graph.ppm
+send SAVE "GRAPH"\r
+expect OK\r\n
+send NEW\r
+expect OK\r\n
+# 4. sound (sw/examples/ch27_siren.bas)
+send 10 REM A TWO-TONE SIREN ON VOICE 0\r
+expect 10 REM A TWO-TONE SIREN ON VOICE 0\r\n
+send 20 FOR N=1 TO 2\r
+expect 20 FOR N=1 TO 2\r\n
+send 30 FOR F=400 TO 800 STEP 50:SOUND 0,F,12:PAUSE 2:NEXT\r
+expect 30 FOR F=400 TO 800 STEP 50:SOUND 0,F,12:PAUSE 2:NEXT\r\n
+send 40 FOR F=800 TO 400 STEP -50:SOUND 0,F,12:PAUSE 2:NEXT\r
+expect 40 FOR F=800 TO 400 STEP -50:SOUND 0,F,12:PAUSE 2:NEXT\r\n
+send 50 NEXT\r
+expect 50 NEXT\r\n
+send 60 SOUND 0,0,0\r
+expect 60 SOUND 0,0,0\r\n
+send RUN\r
+wav out/ch27_siren.wav 1500
+expect OK\r\n
+send SAVE "SIREN"\r
+expect OK\r\n
+# 5. a SAVE/LOAD session
+send NEW\r
+expect OK\r\n
+send COLOR 1,6:CLS\r
+expect OK\r\n
+send LOAD "$"\r
+expect OK\r\n
+send LOAD "TABLE"\r
+expect OK\r\n
+send LIST 20-40\r
+expect OK\r\n
+send PRINT FRE(0)\r
+expect OK\r\n
+send LOAD "TABEL"\r
+expect OK\r\n
+send RUN\r
+expect 81 \r\n
+expect OK\r\n
+frame out/ch27_files.ppm
+quit

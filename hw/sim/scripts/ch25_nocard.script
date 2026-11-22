@@ -1,0 +1,10 @@
+# ch25_nocard.script - SAVE with no card (run without an image file)
+expect MEMORY SIZE
+send \r
+expect WIDTH
+send \r
+expect OK\r\n
+send 10 PRINT 1\r
+send SAVE "X"\r
+expect OK\r\n
+quit

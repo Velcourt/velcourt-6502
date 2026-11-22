@@ -1,0 +1,9 @@
+# appE_author.script - Appendix E: answering A to MEMORY SIZE
+expect MEMORY SIZE
+send A\r
+expect MEMORY SIZE
+send \r
+expect WIDTH
+send \r
+expect OK\r\n
+quit

@@ -1,0 +1,11 @@
+# ch28_trace.script - run with DBG_UART=1 to see every access the CPU
+# makes to the UART ($BF00-$BF0F) and to the PS/2 status ($BF11).
+#   DBG_UART=1 ./obj_soc/sim_soc scripts/ch28_trace.script > out/ch28_trace.txt
+expect MEMORY SIZE
+send \r
+expect WIDTH
+send \r
+expect OK\r\n
+send ?2\r
+expect OK\r\n
+quit

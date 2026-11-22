@@ -1,0 +1,13 @@
+# ch01_monitor.script - the monitor: dump the kernel, enter and run six bytes
+expect MEMORY SIZE
+reset S2
+expect MONITOR
+expect *
+send D E100 E11F\r
+expect *
+send E 0600 A9 41 20 00 FF 60\r
+expect *
+send G 0600\r
+expect *
+frame out/ch01_monitor.ppm
+quit

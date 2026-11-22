@@ -1,0 +1,10 @@
+# ch21_scroll.script - print 30 lines so the screen scrolls (run with DBG_UART=1)
+expect MEMORY SIZE
+send \r
+expect WIDTH
+send \r
+expect OK\r\n
+send CLS:FOR I=1 TO 30:PRINT I:NEXT\r
+expect OK\r\n
+frame out/ch21_scroll.ppm
+quit

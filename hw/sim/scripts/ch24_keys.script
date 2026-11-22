@@ -1,0 +1,36 @@
+# ch24_keys.script - the PS/2 keyboard: typing, Backspace, GET, type-ahead
+expect MEMORY SIZE
+ps2 \r
+expect WIDTH
+ps2 \r
+expect BYTES FREE
+expect OK\r\n
+# Backspace reaches BASIC as "_", which deletes the 2
+ps2 PRINT 12\b3\r
+expect OK\r\n
+# lower case letters come out as capitals
+ps2 print "abc";1+2\r
+expect OK\r\n
+# a key-code viewer
+ps2 10 GET K$:IF K$="" THEN 10\r
+ps2 20 PRINT ASC(K$);:GOTO 10\r
+ps2 RUN\r
+ps2 aZ9 +\r
+wait 20
+# the next line sends a raw Ctrl-C byte ($03) on the serial side,
+# because the keyboard model has no Ctrl key
+send 
+expect BREAK
+expect OK\r\n
+# type-ahead: keys typed while a program runs are kept
+ps2 new\r
+expect OK\r\n
+ps2 cls\r
+expect OK\r\n
+wait 20
+ps2 for i=1 to 3000:next:print peek(574);peek(575)\r
+ps2 print "ahead"\r
+expect AHEAD\r\n
+expect OK\r\n
+frame out/ch24_keys.ppm
+quit

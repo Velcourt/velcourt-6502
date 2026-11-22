@@ -1,0 +1,25 @@
+# appD_timer.script - Appendix D: an IRQ handler installed through irq_vec
+reset S2
+expect MONITOR
+expect *
+send L\r
+expect SEND THE HEX FILE NOW
+send :1006000078A92A8DF002A9068DF102A90085F1A929\r
+send :100610003F8D22BFA9408D2BBFA9178D24BFA9F6FE\r
+send :100620008D25BFA9C08D2EBF586048AD24BFE6F10F\r
+send :07063000A5F18D20BF684019\r
+send :00000001FF\r
+expect *\r\n*
+send G 0600\r
+expect *
+send D 00F1 00F1\r
+expect *
+wait 100
+send D 00F1 00F1\r
+expect *
+wait 100
+send D 00F1 00F1\r
+expect *
+send D 02F0 02F7\r
+expect *
+quit

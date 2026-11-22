@@ -1,0 +1,29 @@
+# ch22_ledirq.script - the interrupt-driven LED counter: load it, let it
+# run one second, stop it with a key, read ticks, count and loops
+reset S2
+expect *
+send L\r
+expect SEND THE HEX FILE NOW
+send :1006000078ADF0028D0507ADF1028D0607A9668D64\r
+send :10061000F002A9068DF102A9008D00078D01078D5A\r
+send :1006200002078D03078D04078D20BFA9408D2BBFC6\r
+send :10063000A9178D24BFA9F68D25BFA9C08D2EBF583F\r
+send :10064000EE0207D008EE0307D003EE04072006FFF2\r
+send :10065000F0EE78A9408D2EBFAD05078DF002AD06F6\r
+send :10066000078DF102586048AD24BFEE0007AD0007CA\r
+send :10067000C914D00EA9008D0007EE0107AD01078D4A\r
+send :0406800020BF6840EF\r
+send :00000001FF\r
+expect \r\n*
+expect \r\n*
+send G 0600\r
+wait 1000
+send Q
+expect \r\n*
+send D 0700 0707\r
+expect 0700:
+expect \r\n*
+send D BF20 BF27\r
+expect BF20:
+expect \r\n*
+quit

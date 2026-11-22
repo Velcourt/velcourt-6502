@@ -1,0 +1,33 @@
+# ch27_start.script - BASIC's start-up questions, the authors, first lines
+expect MEMORY SIZE
+send A\r
+expect MEMORY SIZE
+send \r
+expect WIDTH
+send \r
+expect BYTES FREE
+expect OK\r\n
+send PRINT FRE(0)\r
+expect OK\r\n
+send PRINT "HELLP_O, WORLD"\r
+expect OK\r\n
+send PRINT 123@PRINT 456\r
+expect OK\r\n
+send PRINT 1/0\r
+expect OK\r\n
+send PRINT "ABC"+1\r
+expect OK\r\n
+send GOTO 100\r
+expect OK\r\n
+send 10 SCORE=10:PRINT SCORE\r
+send LIST\r
+expect OK\r\n
+send RUN\r
+expect OK\r\n
+send 10 SC=10:PRINT SC\r
+send RUN\r
+expect OK\r\n
+send SAVE "X"\r
+expect OK\r\n
+frame out/ch27_start.ppm
+quit
