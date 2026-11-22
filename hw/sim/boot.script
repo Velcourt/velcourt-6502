@@ -1,0 +1,10 @@
+# boot.script - switch on, answer BASIC's two questions, try it out
+expect MEMORY SIZE
+send \r
+expect WIDTH
+send \r
+expect OK
+send PRINT "HELLO, WORLD!", 2+2, SQR(2)\r
+expect OK
+frame out_boot.ppm
+quit

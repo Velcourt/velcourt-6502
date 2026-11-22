@@ -1,0 +1,43 @@
+# quick.script - video path, files and the monitor
+expect MEMORY SIZE
+send \r
+expect WIDTH
+send \r
+expect OK\r\n
+send 10 COLOR 1,0:CLS\r
+send 20 FOR I=0 TO 319 STEP 16:LINE 160,100,I,0,(I/16) AND 15\r
+send 25 LINE 160,100,319-I,199,(I/16+3) AND 15:NEXT\r
+send 30 FOR C=0 TO 15:FOR Y=150 TO 165:LINE C*20,Y,C*20+18,Y,C:NEXT:NEXT\r
+send 40 PRINT "COLOURS 0-15":PRINT "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"\r
+send RUN\r
+expect 0123456789\r\n
+expect OK\r\n
+frame out_quick.ppm
+send SAVE "DEMO"\r
+expect SAVED
+expect OK\r\n
+send 50 PRINT "SECOND VERSION"\r
+send SAVE "DEMO2"\r
+expect SAVED
+expect OK\r\n
+send NEW\r
+expect OK\r\n
+send LOAD "DEMO"\r
+expect LOADED
+expect OK\r\n
+send LIST 40\r
+expect OK\r\n
+send LOAD "$"\r
+expect OK\r\n
+frame out_files.ppm
+reset S2
+expect MONITOR
+expect *
+send D E100 E11F\r
+expect *
+send E 0600 A9 41 20 00 FF 60\r
+expect *
+send G 0600\r
+expect *
+frame out_monitor.ppm
+quit
